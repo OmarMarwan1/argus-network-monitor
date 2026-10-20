@@ -37,11 +37,19 @@ Python simulators  ───────────────►  PostgreSQL 
 ## What's built
 
 ### 1. Network foundation
-A full enterprise-style topology designed in Cisco Packet Tracer:
-Internet → ASA firewall (NAT configured) → edge router → redundant core
-switches (OSPF, dual-core) → distribution → access layer. Four VLANs (two
-user segments, Wi-Fi, servers), DHCP per VLAN, inter-VLAN routing, and
-end-to-end connectivity verified through every layer.
+A full hierarchical enterprise topology designed in Cisco Packet Tracer:
+Internet (`Cloud-PT`) → Cisco ASA 5506-X firewall (NAT configured) → Edge Router (`192.168.0.1` / `192.168.2.1`) → redundant Core Layer 3 switches (Cisco 3560-24PS, OSPF, dual-core mesh) → Distribution switches (Cisco 2960-24TT) → Access layer switches, wireless access point, end-user workstations, and servers.
+
+![ARGUS Enterprise Network Topology](topology.png)
+
+| VLAN | Segment | Subnet |
+|---|---|---|
+| `VLAN 10` | Users (Group 1) | `10.10.10.0` |
+| `VLAN 20` | Users (Group 2) | `10.10.20.0` |
+| `VLAN 30` | Wi-Fi | `10.10.30.0` |
+| `VLAN 40` | Servers (`Server0`, `Server1`) | `10.10.40.0` |
+
+DHCP is configured per VLAN with inter-VLAN routing and end-to-end connectivity verified through every layer.
 
 ### 2. Data pipeline
 - PostgreSQL schema: `devices`, `metrics`, `alerts`, `predictions`.
