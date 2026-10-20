@@ -628,19 +628,14 @@ def live_view():
                 label_visibility="collapsed",
             )
 
-        device_id = name_to_id[selected]
         try:
-            metrics = get_data(f"/devices/{device_id}/metrics")
-        except requests.exceptions.HTTPError as e:
-            status = e.response.status_code if e.response is not None else "Unknown"
-            detail = e.response.text if e.response is not None else str(e)
-            if status == 404:
-                st.info(
-                    f"No telemetry recorded for {selected} (device_id={device_id}) yet.")
-            else:
-                st.error(
-                    f"API Error {status} on /devices/{device_id}/metrics: {detail}")
+            metrics = get_data(f"/devices/{name_to_id[selected]}/metrics")
+        except requests.exceptions.HTTPError:
             metrics = []
+
+        if not metrics:
+            st.info("No telemetry recorded for this device yet.")
+        else:
             mdf = pd.DataFrame(metrics)
             mdf["timestamp"] = pd.to_datetime(mdf["timestamp"])
             mdf = mdf.sort_values("timestamp").set_index("timestamp")
