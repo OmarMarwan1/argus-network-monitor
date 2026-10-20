@@ -9,14 +9,10 @@ import pandas as pd
 import requests
 import streamlit as st
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://argus-network-monitor.onrender.com"
+
 refresh_seconds = 10
 
-# --- Palette --------------------------------------------------------------
-# Status colors follow the convention used across real monitoring tools:
-# green = healthy, amber = warning, red = critical. Chart colors are picked
-# to match what each metric means (temperature in a heat tone, packet loss
-# in red, etc.) rather than an arbitrary palette.
 C = {
     "bg": "#070B10",
     "surface": "#0E141C",
