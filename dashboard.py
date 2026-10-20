@@ -369,7 +369,7 @@ hr {{
 # --- Helper: call the API (answers are cached briefly so we don't spam it) --
 @st.cache_data(ttl=5)
 def get_data(path):
-    response = requests.get(f"{API_URL}{path}", timeout=5)
+    response = requests.get(f"{API_URL}{path}", timeout=100)
     response.raise_for_status()
     return response.json()
 
