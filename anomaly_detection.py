@@ -6,7 +6,7 @@ from sqlalchemy import text
 
 from database import engine
 
-model_file = "IsolationForest_models.joblib"
+model_file = "models/isolation_forest_models.joblib"
 
 lookback_hours = 24
 pad_hours = 2
